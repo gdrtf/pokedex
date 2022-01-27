@@ -2,7 +2,7 @@
   "name": "pokedex",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "exports": "./index.js",
   "scripts": {
     "start": "node index.js"
   },
@@ -16,5 +16,6 @@
     "express": "^4.17.2",
     "passport": "^0.5.2",
     "passport-google-oauth20": "^2.0.0"
-  }
+  },
+  "type": "module"
 }

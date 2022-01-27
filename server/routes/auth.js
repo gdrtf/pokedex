@@ -1,5 +1,6 @@
-const router = require('express').Router()
-const passport = require('passport')
+import express from 'express';
+const router = express.Router();
+import passport from 'passport';
 
 const CLIENT_URL = `http://localhost:${process.env.CLIENT_PORT}/`
 
@@ -34,4 +35,4 @@ router.get('/google/callback', passport.authenticate("google", {
   failureRedirect: "/login/failed"
 }))
 
-module.exports = router
+export default router;

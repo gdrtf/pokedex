@@ -1,10 +1,10 @@
-require('dotenv').config()
-const authRoute = require("./routes/auth");
-const cookieSession = require("cookie-session");
-const cors = require("cors");
-const express = require("express");
-const passport = require("passport");
-require("./passport");
+import 'dotenv/config'
+import authRoute from "./routes/auth.js";
+import cookieSession from "cookie-session";
+import cors from "cors";
+import express from "express";
+import passport from "passport";
+import "./passport.js";
 const app = express();
 
 app.use(
