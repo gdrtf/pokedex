@@ -1,5 +1,6 @@
 import 'dotenv/config'
 import authRoute from "./routes/auth.js";
+import pokedexRoute from "./routes/pokedex.js";
 import cookieSession from "cookie-session";
 import cors from "cors";
 import express from "express";
@@ -28,6 +29,7 @@ app.use(
 );
 
 app.use("/auth", authRoute);
+app.use("/pokedex", pokedexRoute);
 
 app.listen(process.env.SERVER_PORT, () => {
   console.log(`Listening on ${process.env.SERVER_PORT}`);

@@ -15,7 +15,8 @@
     "dotenv": "^14.3.2",
     "express": "^4.17.2",
     "passport": "^0.5.2",
-    "passport-google-oauth20": "^2.0.0"
+    "passport-google-oauth20": "^2.0.0",
+    "pokedex-promise-v2": "^4.0.0"
   },
   "type": "module"
 }
