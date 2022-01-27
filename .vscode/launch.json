@@ -1,0 +1,11 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "command": "npm run watch:dev --prefix server",
+      "name": "Run npm dev",
+      "request": "launch",
+      "type": "node-terminal"
+    }
+  ]
+}
