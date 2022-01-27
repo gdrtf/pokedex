@@ -4,7 +4,14 @@
   "description": "",
   "exports": "./index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "dev": "npm start",
+    "watch:dev": "nodemon"
+  },
+  "nodemonConfig": { 
+    "exec": "npm run dev",
+    "watch": ["*"],
+    "ignore": ["**/__tests__/**", "*.test.js", "*.spec.js"]
   },
   "keywords": [],
   "author": "",
@@ -14,6 +21,7 @@
     "cors": "^2.8.5",
     "dotenv": "^14.3.2",
     "express": "^4.17.2",
+    "nodemon": "^2.0.15",
     "passport": "^0.5.2",
     "passport-google-oauth20": "^2.0.0",
     "pokedex-promise-v2": "^4.0.0"
