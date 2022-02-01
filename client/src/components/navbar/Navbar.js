@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import './Navbar.css';
 
 export default function Navbar({ user }) {
   const logout = () => {
@@ -8,7 +9,7 @@ export default function Navbar({ user }) {
   return (
     <div className="navbar">
       <span className="title">
-        <Link className="menu link" to="/">Pokédex</Link>
+        <Link className="menu" to="/">Pokédex</Link>
       </span>
       {user ? (
         <ul className="menu-group">
@@ -16,10 +17,10 @@ export default function Navbar({ user }) {
             <img src={user.photos[0].value} alt="user" className="avatar" />
           </li>
           <li className="menu">{user.displayName}</li>
-          <li className="menu link" onClick={logout}>Logout</li>
+          <li className="menu" onClick={logout}>Logout</li>
         </ul>
       ) : (
-        <Link className="menu link" to="/login">Login</Link>
+        <Link className="menu" to="/login">Login</Link>
       )}
     </div>
   )

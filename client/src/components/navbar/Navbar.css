@@ -1,0 +1,33 @@
+.navbar {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background-color: #ad4c4e; 
+  color: #e6e1d4;
+}
+
+.title {
+  font-weight: bold;
+  font-size: large;
+}
+
+.menu-group {
+  display: flex;
+  align-items: center;
+  list-style: none;
+}
+
+.menu {
+  margin: 10px;
+  cursor: pointer;
+  color: inherit;
+  text-decoration: none;
+} 
+
+.avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+}
