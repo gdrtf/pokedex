@@ -5,6 +5,8 @@ import cookieSession from "cookie-session";
 import cors from "cors";
 import express from "express";
 import passport from "passport";
+import path from "path";
+import {fileURLToPath} from 'url';
 import "./passport.js";
 const app = express();
 
@@ -28,8 +30,17 @@ app.use(
   })
 );
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+app.use(express.static(path.join(__dirname,"../client/build")));
+
 app.use("/auth", authRoute);
 app.use("/pokemon", pokemonRoute);
+app.use("*", (req, res) => {
+  res.sendFile(
+    path.join(__dirname, "../client/build/index.html")
+  );
+});
 
 app.listen(process.env.SERVER_PORT, () => {
   console.log(`Listening on ${process.env.SERVER_PORT}`);
