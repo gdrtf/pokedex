@@ -28,13 +28,12 @@ export default function Autocomplete({names}) {
 
   const getSuggestions = value => {
     const inputValue = value.trim().toLowerCase();
-    const inputLength = inputValue.length;
-    return inputLength === 0 ? [] : names.filter(p => p.slice(0, inputLength) === inputValue);
+    return inputValue.length === 0 ? [] : names.filter(p => p.includes(inputValue));
   };
   
   const getSuggestionValue = suggestion => suggestion;
   
-  const renderSuggestion = suggestion => <Suggestion suggestion={suggestion} />;
+  const renderSuggestion = suggestion => <Suggestion suggestion={suggestion} typeahead={value} />;
 
   const onSuggestionSelected = (event, object) => {
     navigate(`/pokemon/${object.suggestion}`, { replace: false } );
