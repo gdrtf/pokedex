@@ -80,18 +80,12 @@ export default function Pokemon() {
 
   if (pokemon?.success) {
     return (
-      <div className='wrapper'>
+      <div className="wrapper">
         <Card pokemon={pokemon} />
-        <Autocomplete names={names} />
-        {/* <div className="line">
-          <div>
-            <input type="text" />
-            <button>Submit</button>
-          </div>
-          <div>
-            <button onClick={random}>Random</button>
-          </div>
-        </div> */}
+        <div className="line">
+          <Autocomplete names={names} />
+          <button className="btn" onClick={random}>random</button>
+        </div>
       </div>
     )
   } else if (pokemon?.success) {

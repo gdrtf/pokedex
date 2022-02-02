@@ -37,7 +37,7 @@ h1 {
   font-weight: bold;
   margin-bottom: 20px;
   cursor: pointer;
-  color: white;
+  color: #e6e1d4;
 }
 
 .google {
@@ -61,4 +61,27 @@ h1 {
 .label {
   margin: 0 10px 0 10px;
   text-align: center;
+}
+
+button.btn {
+  background: transparent;
+  color: #e6e1d4;
+  border: 2px solid #e6e1d4;
+  font-size: 16px;
+  letter-spacing: 2px;
+  padding: 5px 10px;
+  margin: 16px;
+  cursor: pointer;
+  display: inline-block;
+  -webkit-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  transition: all 0.4s;
+}
+
+button.btn:hover{
+  background-color: #e6e1d4;
+  color: #30292F;
+  -webkit-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  transition: all 0.4s;
 }
