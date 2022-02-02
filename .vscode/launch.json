@@ -16,7 +16,7 @@
         "webRoot": "${workspaceFolder}"
     },
     {
-      "command": "npm run watch:dev --prefix server",
+      "command": "npm run watch:dev",
       "name": "Run npm dev",
       "request": "launch",
       "type": "node-terminal"

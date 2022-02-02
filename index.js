@@ -24,7 +24,7 @@ app.use(passport.session());
 
 app.use(
   cors({
-      origin: `http://localhost:${process.env.CLIENT_PORT}`,
+      origin: "*",
       methods: "GET,POST,PUT,DELETE",
       credentials: true,
   })
@@ -42,6 +42,6 @@ app.use("*", (req, res) => {
   );
 });
 
-app.listen(process.env.SERVER_PORT, () => {
-  console.log(`Listening on ${process.env.SERVER_PORT}`);
+app.listen(process.env.PORT, () => {
+  console.log(`Listening on ${process.env.PORT}`);
 });

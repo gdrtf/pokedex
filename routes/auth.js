@@ -2,8 +2,6 @@ import express from 'express';
 import passport from 'passport';
 const router = express.Router();
 
-const CLIENT_URL = `http://localhost:${process.env.CLIENT_PORT}/`
-
 router.get('/login/success', (req, res) => {
   if (req.user) {
     res.status(200).json({
@@ -23,7 +21,7 @@ router.get('/login/failed', (req, res) => {
 
 router.get("/logout", (req, res) => {
   req.logout()
-  res.redirect(CLIENT_URL)
+  res.redirect("/")
 })
 
 router.get('/google', passport.authenticate("google", {
@@ -31,7 +29,7 @@ router.get('/google', passport.authenticate("google", {
 }))
 
 router.get('/google/callback', passport.authenticate("google", {
-  successRedirect: CLIENT_URL,
+  successRedirect: "/",
   failureRedirect: "/login/failed"
 }))
 
@@ -40,7 +38,7 @@ router.get('/github', passport.authenticate("github", {
 }))
 
 router.get('/github/callback', passport.authenticate("github", {
-  successRedirect: CLIENT_URL,
+  successRedirect: "/",
   failureRedirect: "/login/failed"
 }))
 
