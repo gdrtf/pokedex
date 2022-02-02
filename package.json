@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node index.js",
     "dev": "npm start",
-    "watch:dev": "nodemon"
+    "watch:dev": "nodemon",
+    "build": "npm run build --prefix client"
   },
   "nodemonConfig": {
     "exec": "npm run dev",
