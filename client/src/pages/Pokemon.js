@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, Component } from "react";
 import { useLocation, useNavigate  } from 'react-router-dom';
 
 import Card from "../components/card/Card";
@@ -63,19 +63,15 @@ export default function Pokemon() {
     };
     getNames();
   }, []);
+
+
+  const getRandomPokemonName = () => {
+    const rand = 1 + Math.floor(Math.random() * names.length);
+    return names[rand];
+  }
   
-  const random = () => {
-    fetch(`http://localhost:3001/pokemon/randoname`, {
-      method: "GET",
-      credentials: "include"
-    }).then(response => {
-      if (response.status === 200)
-        return response.json();
-    }).then(resObject => {
-        navigate(`/pokemon/${resObject}`, { replace: false } );
-    }).catch(err => {
-      console.log(err);
-    })
+  const loadToRandomPokemon = () => {
+    navigate(`/pokemon/${getRandomPokemonName()}`, { replace: false } );
   }
 
   if (pokemon?.success) {
@@ -84,7 +80,7 @@ export default function Pokemon() {
         <Card pokemon={pokemon} />
         <div className="line">
           <Autocomplete names={names} />
-          <button className="btn" onClick={random}>random</button>
+          <button className="btn" onClick={loadToRandomPokemon}>random</button>
         </div>
       </div>
     )
