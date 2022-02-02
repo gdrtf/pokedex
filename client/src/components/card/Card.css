@@ -18,6 +18,17 @@
   justify-content: center;
 }
 
+.even-line {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.id {
+  margin: 0 10px 0 10px;
+  text-align: center;
+  margin-top: 5px;
+}
+
 .column {
   flex-grow: 1;
   justify-content: space-evenly;
@@ -27,11 +38,11 @@
 .name {
   margin: auto;
 }
+
 .text {
   margin-top: 20px;
 }
 
 .types {
-  flex-grow: 1;
   display: flex;
 }
