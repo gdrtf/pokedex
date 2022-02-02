@@ -6,7 +6,10 @@ const pokedex = new Pokedex();
 pokedex.getPokemonsList()
 .then((res) => {
   pokedex.pokemons = res.results;
-  pokedex.names = new Set(res.results.map(o => o.name));
+  pokedex.names = {
+    array: res.results.map(o => o.name),
+    hashset: new Set(res.results.map(o => o.name))
+  };
   console.log("Pokemons loaded");
 }).catch((error) => {
   console.log("Error on pokemons loading: " + error.response.statusText);
@@ -72,7 +75,7 @@ function fetchPokemonSpecies(pokemon, action) {
 router.get('/byname/:name', (req, res) => {
   if (req.user) {
     const pokemon = {name : req.params.name};
-    if (pokedex.names.has(pokemon.name)) {
+    if (pokedex.names.hashset.has(pokemon.name)) {
       fetchPokemonDetails(pokemon, () => fetchPokemonSpecies(pokemon, () => res.status(200).json(pokemon)));
     } else {
       console.log("Pokemon not found on pokemon/byname/" + req.params.name);
@@ -124,6 +127,17 @@ router.get('/random', (req, res) => {
       success: false,
       message: "not authorized"
     })
+  }
+})
+
+router.get('/names', (req, res) => {
+  if (req.user) {
+    res.status(200).json(pokedex.names.array);
+  } else {
+    res.status(401).json({
+      success: false,
+      message: "not authorized"
+    });
   }
 })
 

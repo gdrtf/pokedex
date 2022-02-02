@@ -10,7 +10,7 @@ export default function Card({pokemon}) {
         <div className='column'>
           <div className='line'>
             {pokemon.front ? <img src={pokemon.front} alt="" /> : <div />}
-            {pokemon.back ? <img src={pokemon.back} alt="" /> : <div />}
+            {/* {pokemon.back ? <img src={pokemon.back} alt="" /> : <div />} */}
           </div>
           {/* <div className='line'>
             <div className="label">{pokemon.height}m</div>

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useLocation, useNavigate  } from 'react-router-dom';
 
 import Card from "../components/card/Card";
+import Autocomplete from "../components/autocomplete/Autocomplete";
 import Loading from "../components/loading/Loading";
 import NotFound from "../components/notfound/NotFound";
 
@@ -11,13 +12,11 @@ export default function Pokemon() {
   const name = location.pathname.split('/')[2];
 
   const [pokemon, setPokemon] = useState(null);
-  const [front, setFront] = useState(null);
-  const [back, setBack] = useState(null);
-  const [error, setError] = useState(null);
+  const [names, setNames] = useState(null);
 
   useEffect(() => {
     const getPokemon = () => {
-      reset();
+      setPokemon(null);
       fetch(`http://localhost:3001/pokemon/byname/${name}`, {
         method: "GET",
         credentials: "include"
@@ -25,14 +24,20 @@ export default function Pokemon() {
         if (response.status === 200)
           return response.json();
         else if (response.status === 404)
-          setError(true);
+          setPokemon({success : false});
         else
           throw new Error("Authentication has failed!");
-      }).then(resObject => {
-        setPokemon(resObject);
-        // We preload the images before rendering
-        preloadImage(setFront, resObject.front);
-        preloadImage(setBack, resObject.back);
+      }).then(p => {
+        p.success = true;
+        if (p.front == null) {
+          setPokemon(p);
+        } else {
+          const image = new Image();
+          image.onload = () => {
+            setPokemon(p);    
+          }
+          image.src = p.front;
+        }
       }).catch(err => {
         console.log(err);
       })
@@ -40,23 +45,24 @@ export default function Pokemon() {
     getPokemon();
   }, [name]);
 
-  const reset = () => {
-    setPokemon(null);
-    setFront(null);
-    setBack(null);
-    setError(null);
-  }
-
-  const preloadImage = (setState, src) => {
-    if (src == null) { // src can be on some pokemon
-      setState({ imageIsReady: true });
-    }
-    const image = new Image();
-    image.onload = () => {
-      setState({ imageIsReady: true });
-    }
-    image.src = src;
-  }
+  useEffect(() => {
+    const getNames = () => {
+      fetch(`http://localhost:3001/pokemon/names`, {
+        method: "GET",
+        credentials: "include"
+      }).then(response => {
+        if (response.status === 200)
+          return response.json();
+        else
+          throw new Error("Authentication has failed!");
+      }).then(l => {
+        setNames(l);
+      }).catch(err => {
+        console.log(err);
+      })
+    };
+    getNames();
+  }, []);
   
   const random = () => {
     fetch(`http://localhost:3001/pokemon/randoname`, {
@@ -72,10 +78,11 @@ export default function Pokemon() {
     })
   }
 
-  if (pokemon && front && back) {
+  if (pokemon?.success) {
     return (
       <div className='wrapper'>
         <Card pokemon={pokemon} />
+        <Autocomplete names={names} />
         {/* <div className="line">
           <div>
             <input type="text" />
@@ -87,7 +94,7 @@ export default function Pokemon() {
         </div> */}
       </div>
     )
-  } else if (error) {
+  } else if (pokemon?.success) {
     return <NotFound />
   } else {
     return <Loading />
