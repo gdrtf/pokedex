@@ -1,5 +1,5 @@
 export default function Suggestion({suggestion, typeahead}) {
-  if (typeahead == null || typeahead.length == 0) {
+  if (typeahead == null || typeahead.length === 0) {
     return (
       <div>
         {suggestion}
