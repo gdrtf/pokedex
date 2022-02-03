@@ -16,7 +16,6 @@ export default function Autocomplete({names}) {
   };
 
   const onSuggestionsFetchRequested = ({ value }) => {
-    console.log(value);
     setSuggestions(getSuggestions(value));
     setValue(value);
   };

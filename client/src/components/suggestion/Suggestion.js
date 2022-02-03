@@ -6,13 +6,14 @@ export default function Suggestion({suggestion, typeahead}) {
       </div>
     )
   } else {
-    const index = suggestion.indexOf(typeahead);
+    const lower = typeahead.toLowerCase();
+    const index = suggestion.indexOf(lower);
     const prefix = suggestion.substring(0, index);
     const suffix = suggestion.substring(index + typeahead.length);
 
     return (
       <div>
-        {prefix}<strong>{typeahead}</strong>{suffix}
+        {prefix}<strong>{lower}</strong>{suffix}
       </div>
     )
   }
