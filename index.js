@@ -13,20 +13,22 @@ const app = express();
 app.use(
   cookieSession({
       name: "session",
-      keys: ["lama"],
+      keys: ["pokedex"],
       maxAge: 8640000
   })
 );
 
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(
-  cors({
-      origin: "*",
-      methods: "GET,POST,PUT,DELETE",
-      credentials: true,
-  })
-);
+
+app.use(cors({
+  origin: ['http://localhost:3000', 'http://localhost:3001', 'https://circular-pokedex.herokuapp.com'],
+  methods: "GET",
+  credentials: true,
+}));
+
+// Enable https on auth callback URL
+app.enable("trust proxy");
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
