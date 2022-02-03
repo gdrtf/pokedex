@@ -3,15 +3,16 @@ const router = express.Router();
 import Pokedex from 'pokedex-promise-v2';
 const pokedex = new Pokedex();
 
+// we download all the pokemon names so they can be used in the autosuggest field
 pokedex.getPokemonsList()
-.then((res) => {
-  pokedex.pokemons = res.results;
-  pokedex.names = {
-    array: res.results.map(o => o.name),
-    hashset: new Set(res.results.map(o => o.name))
-  };
-  console.log("Pokemons loaded");
-}).catch((error) => {
+  .then((res) => {
+    pokedex.pokemons = res.results;
+    pokedex.names = {
+      array: res.results.map(o => o.name),
+      hashset: new Set(res.results.map(o => o.name))
+    };
+    console.log("Pokemons loaded");
+  }).catch((error) => {
   console.log("Error on pokemons loading: " + error.response.statusText);
   res.status(error.response.status).json({
     success: false,
@@ -72,6 +73,7 @@ function fetchPokemonSpecies(pokemon, action) {
   });
 }
 
+// return the specified pokemon
 router.get('/byname/:name', (req, res) => {
   if (req.user) {
     const pokemon = {name : req.params.name};
@@ -98,6 +100,7 @@ function getRandomPokemonName() {
   return pokedex.pokemons[rand].name;
 }
 
+// returns a random pokemon name
 router.get('/randoname', (req, res) => {
   if (req.user) {
     res.status(200).json(getRandomPokemonName());
@@ -109,6 +112,7 @@ router.get('/randoname', (req, res) => {
   }
 })
 
+// returns a random pokemon
 router.get('/random', (req, res) => {
   if (req.user) {
     pokedex.getPokemonByName(getRandomPokemonName())
@@ -130,6 +134,7 @@ router.get('/random', (req, res) => {
   }
 })
 
+// return all the pokemon names
 router.get('/names', (req, res) => {
   if (req.user) {
     res.status(200).json(pokedex.names.array);

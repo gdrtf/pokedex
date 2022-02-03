@@ -7,6 +7,8 @@
     "start": "node index.js",
     "dev": "npm start",
     "watch:dev": "nodemon --ignore ./client/",
+    "server": "npm run watch:dev",
+    "client": "npm start --prefix client",
     "build": "npm run build --prefix client"
   },
   "nodemonConfig": {
@@ -27,13 +29,15 @@
     "client": "file:./client",
     "cookie-session": "^2.0.0",
     "cors": "^2.8.5",
-    "dotenv": "^14.3.2",
     "express": "^4.17.2",
-    "nodemon": "^2.0.15",
     "passport": "^0.5.2",
     "passport-github2": "^0.1.12",
     "passport-google-oauth20": "^2.0.0",
     "pokedex-promise-v2": "^4.0.0"
+  },
+  "devDependencies": {
+    "dotenv": "^16.0.0",
+    "nodemon": "^2.0.15"
   },
   "type": "module"
 }

@@ -78,7 +78,7 @@ export default function Pokemon() {
     return (
       <div className="wrapper">
         <Card pokemon={pokemon} />
-        <div className="line">
+        <div className="form">
           <Autocomplete names={names} />
           <button className="btn" onClick={loadToRandomPokemon}>random</button>
         </div>

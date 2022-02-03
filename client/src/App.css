@@ -72,6 +72,15 @@ h1 {
   text-align: center;
 }
 
+.form {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-content: center;
+  justify-content: center;
+}
+
 button.btn {
   background: transparent;
   color: #e6e1d4;
@@ -79,7 +88,6 @@ button.btn {
   font-size: 16px;
   letter-spacing: 2px;
   padding: 5px 10px;
-  margin: 16px;
   cursor: pointer;
   display: inline-block;
   -webkit-transition: all 0.4s;

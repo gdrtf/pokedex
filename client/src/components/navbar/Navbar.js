@@ -13,10 +13,10 @@ export default function Navbar({ user }) {
       </span>
       {user ? (
         <ul className="menu-group">
-          <li className="menu">
+          <li className="identity">
             <img src={user.photos[0].value} alt="user" className="avatar" />
+            <span>{user.displayName}</span>
           </li>
-          <li className="menu">{user.displayName}</li>
           <li className="menu" onClick={logout}>Logout</li>
         </ul>
       ) : (
