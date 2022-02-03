@@ -5,7 +5,7 @@ import passport from "passport"
 passport.use(new GoogleStrategy({
   clientID: process.env.GOOGLE_CLIENT_ID,
   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-  callbackURL: "/auth/google/callback"
+  callbackURL: "/api/auth/google/callback"
 }, function (accessToken, refreshToken, profile, done) {
   done(null,profile)
 }));
@@ -13,7 +13,7 @@ passport.use(new GoogleStrategy({
 passport.use(new GithubStrategy({
   clientID: process.env.GITHUB_CLIENT_ID,
   clientSecret: process.env.GITHUB_CLIENT_SECRET,
-  callbackURL: "/auth/github/callback"
+  callbackURL: "/api/auth/github/callback"
 }, function (accessToken, refreshToken, profile, done) {
   done(null,profile)
 }));

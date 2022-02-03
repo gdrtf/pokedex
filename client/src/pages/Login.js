@@ -4,10 +4,10 @@ import GithubIcon from './../images/github.png'
 
 export default function Login() {
   const google = () => {
-    window.open("http://localhost:3001/auth/google","_self")
+    window.open("/api/auth/google","_self")
   }
   const github = () => {
-    window.open("http://localhost:3001/auth/github","_self")
+    window.open("/api/auth/github","_self")
   }
 
   return (

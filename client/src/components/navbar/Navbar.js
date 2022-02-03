@@ -3,7 +3,7 @@ import './Navbar.css';
 
 export default function Navbar({ user }) {
   const logout = () => {
-    window.open("http://localhost:3001/auth/logout", "_self")
+    window.open("/api/auth/logout", "_self")
   }
 
   return (

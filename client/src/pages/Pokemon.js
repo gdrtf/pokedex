@@ -17,7 +17,7 @@ export default function Pokemon() {
   useEffect(() => {
     const getPokemon = () => {
       setPokemon(null);
-      fetch(`http://localhost:3001/pokemon/byname/${name}`, {
+      fetch(`/api/pokemon/byname/${name}`, {
         method: "GET",
         credentials: "include"
       }).then(response => {
@@ -47,7 +47,7 @@ export default function Pokemon() {
 
   useEffect(() => {
     const getNames = () => {
-      fetch(`http://localhost:3001/pokemon/names`, {
+      fetch(`/api/pokemon/names`, {
         method: "GET",
         credentials: "include"
       }).then(response => {

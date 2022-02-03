@@ -34,8 +34,8 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 app.use(express.static(path.join(__dirname,"./client/build")));
 
-app.use("/auth", authRoute);
-app.use("/pokemon", pokemonRoute);
+app.use("/api/auth", authRoute);
+app.use("/api/pokemon", pokemonRoute);
 app.use("*", (req, res) => {
   res.sendFile(
     path.join(__dirname, "./client/build/index.html")
