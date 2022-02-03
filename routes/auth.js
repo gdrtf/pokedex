@@ -26,6 +26,15 @@ router.get("/logout", (req, res) => {
   res.redirect(host)
 })
 
+router.get("/auth0", passport.authenticate("auth0", {
+  scope: ["profile"]
+}))
+
+router.get("/auth0/callback", passport.authenticate("auth0", {
+  successRedirect: host,
+  failureRedirect: "/login/failed"
+}))
+
 router.get("/google", passport.authenticate("google", {
   scope: ["profile"]
 }))

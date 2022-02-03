@@ -45,6 +45,11 @@ h1 {
   color: #e6e1d4;
 }
 
+.auth0 {
+  color: #EB5424;
+  background-color: #e6e1d4;
+}
+
 .google {
   background-color: #a53b2b;
 }
