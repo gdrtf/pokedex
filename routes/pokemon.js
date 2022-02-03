@@ -22,7 +22,6 @@ pokedex.getPokemonsList()
 
 function setPokemonDetails(pokemon, details) {
   pokemon.id = details.id;
-  pokemon.name = details.name;
   pokemon.species = details.species.name;
   pokemon.types = details.types.map(t => t.type.name);
   pokemon.front = details.sprites.front_default;

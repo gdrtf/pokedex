@@ -23,9 +23,10 @@ export default function Pokemon() {
       }).then(response => {
         if (response.status === 200)
           return response.json();
-        else if (response.status === 404)
+        else if (response.status === 404) {
           setPokemon({success : false});
-        else
+          throw new Error("Pokemon not found");
+        } else
           throw new Error("Authentication has failed!");
       }).then(p => {
         p.success = true;
@@ -84,7 +85,7 @@ export default function Pokemon() {
         </div>
       </div>
     )
-  } else if (pokemon?.success) {
+  } else if (!pokemon?.success) {
     return <NotFound />
   } else {
     return <Loading />
