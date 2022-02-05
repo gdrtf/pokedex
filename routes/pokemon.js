@@ -30,25 +30,14 @@ function setPokemonDetails(pokemon, details) {
   pokemon.weight = details.weight/1;
 }
 
-function fetchPokemonDetails(pokemon, action) {
-  pokedex.getPokemonByName(pokemon.name)
-  .then((details) => {
-    setPokemonDetails(pokemon, details);
-    action();
-  })
-  .catch((error) => {
-    console.log("Error on pokemon/byname/" + req.params.name + ": " + error.response.statusText);
-    res.status(error.response.status).json({
-      success: false,
-      message: error.response.statusText
-    })
-  });
+function clean(text) {
+  return text.replace("\n", " ").replace("\f", " ").replace("  ", " ");
 }
 
 function setPokemonSpecies(pokemon, species) {
   for (var i = 0; i < species.flavor_text_entries.length; i++) {
     if (species.flavor_text_entries[i].language.name == "en") {
-      pokemon.descr = species.flavor_text_entries[i].flavor_text.replace("\n", " ").replace("\f", " ").replace("  ", " ");
+      pokemon.descr = clean(species.flavor_text_entries[i].flavor_text);
       break;
     }
   }
@@ -57,42 +46,32 @@ function setPokemonSpecies(pokemon, species) {
   pokemon.varieties = species.varieties.map(t => t.pokemon.name);
 }
 
-function fetchPokemonSpecies(pokemon, action) {
-  pokedex.getPokemonSpeciesByName(pokemon.species)
-  .then((species) => {
-    setPokemonSpecies(pokemon, species);
-    action();
-  })
-  .catch((error) => {
-    console.log("Error on pokemon/byname/" + req.params.name + ": " + error.response.statusText);
-    res.status(error.response.status).json({
-      success: false,
-      message: error.response.statusText
-    })
-  });
-}
-
 // return the specified pokemon
 router.get('/byname/:name', (req, res) => {
-  if (req.user) {
-    const pokemon = {name : req.params.name};
-    if (pokedex.names.hashset.has(pokemon.name)) {
-      fetchPokemonDetails(pokemon, () => fetchPokemonSpecies(pokemon, () => res.status(200).json(pokemon)));
-    } else {
-      console.log("Pokemon not found on pokemon/byname/" + req.params.name);
-      res.status(404).json({
-        success: false,
-        message: "not found"
-      });
-    }
-  } else {
-    console.log("Error on pokemon/byname/" + req.params.name + ": not authorized");
-    res.status(401).json({
+  const pokemon = {name : req.params.name};
+  return new Promise((resolve) => {
+    if (!req.user)
+      throw new Error("not authorized");
+    if (!pokedex.names.hashset.has(pokemon.name))
+      throw new Error("unkown pokemon");
+    resolve(pokedex.getPokemonByName(pokemon.name));
+  }).then((details) => {
+    setPokemonDetails(pokemon, details);
+    return pokedex.getPokemonSpeciesByName(pokemon.species);
+  })
+  .then((species) => {
+    setPokemonSpecies(pokemon, species);
+    return res.status(200).json(pokemon);
+  })
+  .catch((error) => {
+    const message = error.message ?? error.response.statusText;
+    console.log("Error on pokemon/byname/" + req.params.name + ": " + message);
+    res.status(error.response?.status ?? 404).json({
       success: false,
-      message: "not authorized"
+      message: message
     })
-  }
-})
+  });
+});
 
 function getRandomPokemonName() {
   const rand = 1 + Math.floor(Math.random() * pokedex.pokemons.length);
@@ -113,24 +92,22 @@ router.get('/randoname', (req, res) => {
 
 // returns a random pokemon
 router.get('/random', (req, res) => {
-  if (req.user) {
-    pokedex.getPokemonByName(getRandomPokemonName())
-    .then((response) => {
-      res.status(200).json(formatPokemon(response));
-    })
-    .catch((error) => {
-      console.log("Error on pokemon/random: " + error.response.statusText);
-      res.status(error.response.status).json({
-        success: false,
-        message: error.response.statusText
-      })
-    });
-  } else {
-    res.status(401).json({
+  return new Promise((resolve) => {
+    if (!req.user)
+      throw new Error("not authorized");
+    resolve(pokedex.getPokemonByName(getRandomPokemonName()));
+  })
+  .then((response) => {
+    res.status(200).json(formatPokemon(response));
+  })
+  .catch((error) => {
+    const message = error.message ?? error.response.statusText;
+    console.log("Error on pokemon/random: " + message);
+    res.status(error.response?.status ?? 401).json({
       success: false,
-      message: "not authorized"
+      message: message
     })
-  }
+  });
 })
 
 // return all the pokemon names
