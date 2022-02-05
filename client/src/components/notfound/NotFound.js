@@ -1,10 +1,5 @@
-import './NotFound.css';
+import "./NotFound.css";
 
 export default function NotFound() {
-
-  return (
-    <div className='notfound'>
-        Not found!
-    </div>
-  )
+  return <div className="notfound">Not found!</div>;
 }

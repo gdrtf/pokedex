@@ -9,7 +9,10 @@
     "watch:dev": "nodemon --ignore ./client/",
     "server": "npm run watch:dev",
     "client": "npm start --prefix client",
-    "build": "npm run build --prefix client"
+    "build": "npm run build --prefix client",
+    "lint": "eslint ./ --ignore-pattern client/build/*",
+    "lint:fix": "npm run lint -- --fix",
+    "format": "prettier --write \"{,!(node_modules)/**/}*.js\""
   },
   "nodemonConfig": {
     "exec": "npm run dev",
@@ -38,7 +41,9 @@
     "pokedex-promise-v2": "^4.0.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.15"
+    "eslint": "^8.8.0",
+    "nodemon": "^2.0.15",
+    "prettier": "^2.5.1"
   },
   "type": "module"
 }

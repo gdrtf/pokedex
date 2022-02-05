@@ -1,10 +1,6 @@
-export default function Suggestion({suggestion, typeahead}) {
+export default function Suggestion({ suggestion, typeahead }) {
   if (typeahead == null || typeahead.length === 0) {
-    return (
-      <div>
-        {suggestion}
-      </div>
-    )
+    return <div>{suggestion}</div>;
   } else {
     // We highlight the section of the suggestion the user typed
 
@@ -15,8 +11,10 @@ export default function Suggestion({suggestion, typeahead}) {
 
     return (
       <div>
-        {prefix}<strong>{lower}</strong>{suffix}
+        {prefix}
+        <strong>{lower}</strong>
+        {suffix}
       </div>
-    )
+    );
   }
 }
