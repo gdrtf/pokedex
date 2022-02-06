@@ -1,13 +1,12 @@
 import { useState, useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 import Card from "../components/card/Card";
-import Autocomplete from "../components/autocomplete/Autocomplete";
+import Lookup from "../components/lookup/Lookup";
 import Loading from "../components/loading/Loading";
 import NotFound from "../components/notfound/NotFound";
 
 export default function Pokemon() {
-  const navigate = useNavigate();
   const location = useLocation();
   const name = location.pathname.split("/")[2];
 
@@ -72,26 +71,12 @@ export default function Pokemon() {
       img.src = pokemon.front;
     });
 
-  const getRandomPokemonName = () => {
-    const rand = 1 + Math.floor(Math.random() * names.length);
-    return names[rand];
-  };
-
-  const loadToRandomPokemon = () => {
-    navigate(`/pokemon/${getRandomPokemonName()}`, { replace: false });
-  };
-
   if (pokemon) {
     if (pokemon.found) {
       return (
         <div className="wrapper">
           <Card pokemon={pokemon} />
-          <div className="form">
-            <Autocomplete names={names} />
-            <button className="btn" onClick={loadToRandomPokemon}>
-              random
-            </button>
-          </div>
+          <Lookup names={names} />
         </div>
       );
     } else {

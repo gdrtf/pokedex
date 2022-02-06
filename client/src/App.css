@@ -76,34 +76,3 @@ h1 {
   margin: 0 10px 0 10px;
   text-align: center;
 }
-
-.form {
-  margin-top: 10px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  align-content: center;
-  justify-content: center;
-}
-
-button.btn {
-  background: transparent;
-  color: #e6e1d4;
-  border: 2px solid #e6e1d4;
-  font-size: 16px;
-  letter-spacing: 2px;
-  padding: 5px 10px;
-  cursor: pointer;
-  display: inline-block;
-  -webkit-transition: all 0.4s;
-  -moz-transition: all 0.4s;
-  transition: all 0.4s;
-}
-
-button.btn:hover{
-  background-color: #e6e1d4;
-  color: #30292F;
-  -webkit-transition: all 0.4s;
-  -moz-transition: all 0.4s;
-  transition: all 0.4s;
-}
