@@ -59,6 +59,7 @@ if (process.env.GITHUB_CLIENT_ID && process.env.GITHUB_CLIENT_SECRET) {
   );
 }
 
+// If no OAuth credential is present in env variables, we create a mock strategy for easy development purpose
 if (strategies.length == 0) {
   strategies.push("mock");
   passport.use(

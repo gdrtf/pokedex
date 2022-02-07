@@ -1,6 +1,6 @@
 import express from "express";
-const router = express.Router();
 import Pokedex from "pokedex-promise-v2";
+const router = express.Router();
 const pokedex = new Pokedex();
 
 // we download all the pokemon names so they can be used in the autosuggest field
@@ -27,7 +27,6 @@ function setPokemonDetails(pokemon, details) {
   pokemon.species = details.species.name;
   pokemon.types = details.types.map((t) => t.type.name);
   pokemon.front = details.sprites.front_default;
-  pokemon.back = details.sprites.back_default;
   pokemon.height = details.height / 10;
   pokemon.weight = details.weight / 10;
 }
@@ -37,14 +36,17 @@ function clean(text) {
 }
 
 function setPokemonSpecies(pokemon, species) {
+  // We take the first english description
   for (var i = 0; i < species.flavor_text_entries.length; i++) {
     if (species.flavor_text_entries[i].language.name == "en") {
       pokemon.descr = clean(species.flavor_text_entries[i].flavor_text);
       break;
     }
   }
+  // Evolves from
   if (species.evolves_from_species != null)
     pokemon.from = [species.evolves_from_species.name];
+  // Other species varieties
   pokemon.varieties = species.varieties.map((t) => t.pokemon.name);
 }
 

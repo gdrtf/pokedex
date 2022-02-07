@@ -81,6 +81,7 @@ router.get(
   })
 );
 
+// The client needs to know the strategies implemented
 router.get("/strategies", (req, res) => {
   res.status(200).json(strategies);
 });
