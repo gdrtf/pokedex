@@ -20,12 +20,7 @@
 .even-line {
   display: flex;
   justify-content: space-evenly;
-}
-
-.id {
-  margin: 0 10px 0 10px;
-  text-align: center;
-  margin-top: 5px;
+  align-items: center;
 }
 
 .column {

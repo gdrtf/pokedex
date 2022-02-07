@@ -11,7 +11,7 @@ export default function Strategy({ strategies, strategy }) {
       className={["button", "strategy-" + strategy].join(" ")}
       onClick={login}
     >
-      <img src={Images[strategy]} alt="" className="icon" />
+      <img src={Images.auth[strategy]} alt="" className="icon" />
       <span className="strategy-label">{strategy}</span>
     </div>
   ) : (

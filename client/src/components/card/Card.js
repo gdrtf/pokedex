@@ -21,7 +21,18 @@ export default function Card({ pokemon }) {
                 return <Type key={type} type={type} />;
               })}
             </div>
-            <div className="id">id: {pokemon.id}</div>
+            <div className="label">
+              <strong>id: </strong>
+              {pokemon.id}
+            </div>
+            <div className="label">
+              <strong>ht: </strong>
+              {pokemon.height}m
+            </div>
+            <div className="label">
+              <strong>wt: </strong>
+              {pokemon.weight}kg
+            </div>
           </div>
         </div>
       </div>

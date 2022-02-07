@@ -29,7 +29,7 @@ function setPokemonDetails(pokemon, details) {
   pokemon.front = details.sprites.front_default;
   pokemon.back = details.sprites.back_default;
   pokemon.height = details.height / 10;
-  pokemon.weight = details.weight / 1;
+  pokemon.weight = details.weight / 10;
 }
 
 function clean(text) {

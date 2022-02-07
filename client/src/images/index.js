@@ -1,8 +1,10 @@
 const images = {
-  auth0: require("./auth0.png"),
-  github: require("./github.png"),
-  google: require("./google.png"),
-  mock: require("./mock.png"),
+  auth: {
+    auth0: require("./auth/auth0.png"),
+    github: require("./auth/github.png"),
+    google: require("./auth/google.png"),
+    mock: require("./auth/mock.png"),
+  },
 };
 
 export default images;
