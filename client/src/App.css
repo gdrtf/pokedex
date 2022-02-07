@@ -33,37 +33,6 @@ h1 {
   justify-content: center;
 }
 
-.button {
-  width: 150px;
-  padding: 15px 25px;
-  border-radius: 5px;
-  display: flex;
-  align-items: center;
-  font-weight: bold;
-  margin-bottom: 20px;
-  cursor: pointer;
-  color: #e6e1d4;
-}
-
-.auth0 {
-  color: #EB5424;
-  background-color: #e6e1d4;
-}
-
-.google {
-  background-color: #a53b2b;
-}
-
-.github {
-  background-color: #141114;
-}
-
-.icon {
-  width: 20px;
-  height: 20px;
-  margin-right: 10px;
-}
-
 .wrapper {
   min-height: calc(100vh - 50px);
   display: flex;

@@ -1,35 +1,36 @@
-import React from "react";
-import Auth0Icon from "./../images/auth0.png";
-import GoogleIcon from "./../images/google.png";
-import GithubIcon from "./../images/github.png";
+import { useEffect, useState } from "react";
+import Strategy from "../components/strategies/Strategy";
 
 export default function Login() {
-  const auth0 = () => {
-    window.open("/api/auth/auth0", "_self");
-  };
+  const [strategies, setStrategies] = useState(null);
 
-  const google = () => {
-    window.open("/api/auth/google", "_self");
-  };
+  useEffect(() => {
+    const getStrategies = () => {
+      fetch(`/api/auth/strategies`, {
+        method: "GET",
+      })
+        .then((response) => {
+          if (response.status === 200) return response.json();
+          throw new Error("Error on server!");
+        })
+        .then((strategies) => {
+          setStrategies(strategies);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    };
+    getStrategies();
+  }, []);
 
-  const github = () => {
-    window.open("/api/auth/github", "_self");
-  };
-
-  return (
+  return strategies ? (
     <div className="login">
-      <div className="button auth0" onClick={auth0}>
-        <img src={Auth0Icon} alt="GoogleIcon" className="icon" />
-        Auth0
-      </div>
-      <div className="button google" onClick={google}>
-        <img src={GoogleIcon} alt="GoogleIcon" className="icon" />
-        Google
-      </div>
-      <div className="button github" onClick={github}>
-        <img src={GithubIcon} alt="GithubIcon" className="icon" />
-        Github
-      </div>
+      <Strategy strategies={strategies} strategy="auth0" />
+      <Strategy strategies={strategies} strategy="google" />
+      <Strategy strategies={strategies} strategy="github" />
+      <Strategy strategies={strategies} strategy="mock" />
     </div>
+  ) : (
+    <div />
   );
 }

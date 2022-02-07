@@ -1,0 +1,39 @@
+.button {
+  width: 150px;
+  padding: 15px 25px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  margin-bottom: 20px;
+  cursor: pointer;
+  color: #e6e1d4;
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}
+
+.strategy-auth0 {
+  color: #EB5424;
+  background-color: #e6e1d4;
+}
+
+.strategy-google {
+  background-color: #a53b2b;
+}
+
+.strategy-github {
+  background-color: #141114;
+}
+
+.strategy-mock {
+  background-color: #a53b2b;
+  color: #e6e1d4;
+}
+
+.strategy-label {
+  text-transform: capitalize;
+}

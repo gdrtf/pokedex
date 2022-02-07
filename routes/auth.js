@@ -1,5 +1,6 @@
 import express from "express";
 import passport from "passport";
+import { strategies } from "../passport.js";
 const router = express.Router();
 
 const host =
@@ -73,5 +74,17 @@ router.get(
     failureRedirect: "/login/failed",
   })
 );
+
+router.get(
+  "/mock",
+  passport.authenticate("mock", {
+    successRedirect: host,
+    failureRedirect: "/login/failed",
+  })
+);
+
+router.get("/strategies", (req, res) => {
+  res.status(200).json(strategies);
+});
 
 export default router;
