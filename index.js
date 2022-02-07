@@ -8,7 +8,9 @@ import passport from "passport";
 import path from "path";
 import { fileURLToPath } from "url";
 import "./passport.js";
+
 const app = express();
+const PORT = process.env.PORT ?? 3001;
 
 app.use(
   cookieSession({
@@ -46,6 +48,6 @@ app.use("*", (req, res) => {
   res.sendFile(path.join(__dirname, "./client/build/index.html"));
 });
 
-app.listen(process.env.PORT, () => {
-  console.log(`Listening on ${process.env.PORT}`);
+app.listen(PORT, () => {
+  console.log(`Listening on ${PORT}`);
 });

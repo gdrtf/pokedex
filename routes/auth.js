@@ -1,12 +1,10 @@
 import express from "express";
 import passport from "passport";
 import { strategies } from "../passport.js";
-const router = express.Router();
 
-const host =
-  process.env.CLIENT_PORT != null
-    ? `http://localhost:${process.env.CLIENT_PORT}`
-    : "/";
+const router = express.Router();
+const port = process.env.CLIENT_PORT ?? 3000;
+const host = port != null ? `http://localhost:${port}` : "/";
 
 router.get("/login/success", (req, res) => {
   if (req.user) {
