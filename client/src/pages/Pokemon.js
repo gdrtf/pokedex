@@ -22,9 +22,13 @@ export default function Pokemon() {
       })
         .then((response) => {
           if (response.status === 200) return response.json();
-          else if (response.status === 404)
+          else if (response.status === 404) {
+            setPokemon({ found: false });
             throw new Error("Pokemon not found");
-          throw new Error("Authentication has failed!");
+          } else if (response.status === 401) {
+            logout();
+          }
+          throw new Error(response.statusText);
         })
         .then((pokemon) => {
           if (pokemon == null) throw new Error("Pokemon not found");
@@ -35,7 +39,6 @@ export default function Pokemon() {
           setPokemon(pokemon);
         })
         .catch((error) => {
-          setPokemon({ found: false });
           console.log(error);
         });
     };
@@ -61,6 +64,10 @@ export default function Pokemon() {
     };
     getNames();
   }, []);
+
+  const logout = () => {
+    window.open("/api/auth/logout", "_self");
+  };
 
   const loadImage = (pokemon) =>
     new Promise((resolve, reject) => {
