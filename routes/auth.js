@@ -3,8 +3,13 @@ import passport from "passport";
 import { strategies } from "../passport.js";
 
 const router = express.Router();
-const port = process.env.CLIENT_PORT ?? 3000;
-const host = port != null ? `http://localhost:${port}` : "/";
+
+const getHost = () => {
+  if (process.env.CLIENT_PORT != null || strategies.includes("mock"))
+    // This means we are in a local/dev environment
+    return `http://localhost:${process.env.CLIENT_PORT ?? 3000}`;
+  return "/";
+};
 
 router.get("/login/success", (req, res) => {
   if (req.user) {
@@ -25,7 +30,7 @@ router.get("/login/failed", (req, res) => {
 
 router.get("/logout", (req, res) => {
   req.logout();
-  res.redirect(host);
+  res.redirect(getHost());
 });
 
 router.get(
@@ -38,7 +43,7 @@ router.get(
 router.get(
   "/auth0/callback",
   passport.authenticate("auth0", {
-    successRedirect: host,
+    successRedirect: getHost(),
     failureRedirect: "/login/failed",
   })
 );
@@ -53,7 +58,7 @@ router.get(
 router.get(
   "/google/callback",
   passport.authenticate("google", {
-    successRedirect: host,
+    successRedirect: getHost(),
     failureRedirect: "/login/failed",
   })
 );
@@ -68,7 +73,7 @@ router.get(
 router.get(
   "/github/callback",
   passport.authenticate("github", {
-    successRedirect: host,
+    successRedirect: getHost(),
     failureRedirect: "/login/failed",
   })
 );
@@ -76,7 +81,7 @@ router.get(
 router.get(
   "/mock",
   passport.authenticate("mock", {
-    successRedirect: host,
+    successRedirect: getHost(),
     failureRedirect: "/login/failed",
   })
 );
