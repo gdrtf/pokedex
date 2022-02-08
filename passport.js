@@ -67,6 +67,10 @@ if (strategies.length == 0) {
     new MockStrategy(
       {
         name: "mock",
+        user: {
+          id: "mock",
+          displayName: "Mocked User",
+        },
         passReqToCallback: false,
       },
       function (user, done) {
