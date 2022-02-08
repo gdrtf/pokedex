@@ -42,6 +42,10 @@ GITHUB_CLIENT_ID =        //-----   github client id   -----//
 GITHUB_CLIENT_SECRET =    //----- github client secret -----//
 ```
 - If no .env is present, the app will use the default ports and use a mocking strategy authentication
+- Install dependencies recursively
+```
+npm install
+```
 - Run the server
 ```
 npm run server
