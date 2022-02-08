@@ -1,3 +1,4 @@
+import Characteristic from "../characteristic/Characteristic";
 import List from "../list/List";
 import Type from "../type/Type";
 import "./Card.css";
@@ -21,18 +22,9 @@ export default function Card({ pokemon }) {
                 return <Type key={type} type={type} />;
               })}
             </div>
-            <div className="label">
-              <strong>id: </strong>
-              {pokemon.id}
-            </div>
-            <div className="label">
-              <strong>ht: </strong>
-              {pokemon.height}m
-            </div>
-            <div className="label">
-              <strong>wt: </strong>
-              {pokemon.weight}kg
-            </div>
+            <Characteristic name="id" value={pokemon.id} unit="" />
+            <Characteristic name="ht" value={pokemon.height} unit="m" />
+            <Characteristic name="wt" value={pokemon.weight} unit="kg" />
           </div>
         </div>
       </div>
